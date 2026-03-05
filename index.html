@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fullscreen iFrame</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Hide scrollbars on the main page */
+    }
+    iframe {
+        position: fixed; /* Position relative to the viewport */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none; /* Removes the default iframe border */
+    }
+</style>
+</head>
+<body>
+
+<!-- Replace "https://www.clever.com" with the URL you want to embed -->
+<iframe src="https://clever.com" title="Embedded Website"></iframe>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-up Calculator</title>
+    <style>
+        /* Floating Button */
+        #calc-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2563eb;
+            color: white;
+            padding: 15px 10px;
+            cursor: pointer;
+            border-radius: 8px 0 0 8px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-weight: bold;
+            box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        /* Calculator Container */
+        #calc-container {
+            display: none;
+            position: fixed;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1001;
+            width: 250px;
+        }
+
+        /* Close Button (The Cross) */
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Calculator UI */
+        #display {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 10px;
+            text-align: right;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            background: #374151;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        button {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background: #4b5563;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover { background: #6b7280; }
+        .operator { background: #3b82f6; }
+        .equal { background: #10b981; grid-column: span 2; }
+        .clear { background: #ef4444; grid-column: span 2; }
+    </style>
+</head>
+<body>
+
+    <div id="calc-toggle" onclick="toggleCalc()">CALCULATOR</div>
+
+    <div id="calc-container">
+        <span class="close-btn" onclick="toggleCalc()">×</span>
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="appendValue('/')">/</button>
+            <button class="operator" onclick="appendValue('*')">×</button>
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button class="operator" onclick="appendValue('-')">-</button>
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button class="operator" onclick="appendValue('+')">+</button>
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        const container = document.getElementById('calc-container');
+
+        function toggleCalc() {
+            container.style.display = (container.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function appendValue(input) {
+            display.value += input;
+        }
+
+        function clearDisplay() {
+            display.value = "";
+        }
+
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
+
+</body>
+</html>
